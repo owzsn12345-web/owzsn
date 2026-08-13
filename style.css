@@ -1,0 +1,141 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #111;
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+}
+
+.wrap {
+  width: min(920px, 94vw);
+  margin: 42px auto 60px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 38px;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.legend button {
+  border: 0;
+  background: transparent;
+  font-size: 20px;
+  padding: 2px 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.legend span {
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.legend button[data-status="otp"] span { color: #f5a7c1; }
+.legend button[data-status="good"] span { color: #f28d72; }
+.legend button[data-status="like"] span { color: #f4d98e; }
+.legend button[data-status="interest"] span { color: #acdedd; }
+.legend button[data-status="none"] span { color: #fff; text-shadow: 0 0 0 #aaa, 0 0 1px #777; }
+.legend button[data-status="hate"] span { color: #444; }
+
+.hint {
+  color: #777;
+  font-size: 13px;
+  margin: 0 0 14px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  min-width: 620px;
+}
+
+th, td {
+  border: 1px solid #999;
+  height: 88px;
+  padding: 8px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+th, td:first-child {
+  background: #eefdfd;
+}
+
+th {
+  font-weight: 500;
+}
+
+td.cell {
+  background: #fff;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background .12s;
+}
+
+td.cell:hover {
+  background: #fafafa;
+}
+
+.mark {
+  font-size: 42px;
+  line-height: 1;
+  display: inline-block;
+}
+
+.status-otp .mark { color: #f5a7c1; }
+.status-good .mark { color: #f28d72; }
+.status-like .mark { color: #f4d98e; }
+.status-interest .mark { color: #acdedd; }
+.status-none .mark { color: #fff; text-shadow: 0 0 1px #888; }
+.status-hate .mark { color: #444; }
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.actions button {
+  border: 1px solid #aaa;
+  background: #fff;
+  border-radius: 8px;
+  padding: 9px 15px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 650px) {
+  .wrap { margin-top: 28px; }
+  h1 { margin-bottom: 28px; }
+  .legend { gap: 8px 14px; }
+  .legend button { font-size: 16px; }
+  .legend span { font-size: 21px; }
+  th, td { height: 72px; font-size: 20px; }
+  .mark { font-size: 34px; }
+}

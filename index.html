@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>셋페스 취향표</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <h1>셋페스 취향표</h1>
+
+    <div class="legend">
+      <button data-status="otp"><span>♥</span> OTP</button>
+      <button data-status="good"><span>♥</span> 좋음</button>
+      <button data-status="like"><span>♥</span> 호감</button>
+      <button data-status="interest"><span>♥</span> 관심있음</button>
+      <button data-status="none"><span>♡</span> 관심없음</button>
+      <button data-status="hate"><span>♥</span> 지뢰</button>
+    </div>
+
+    <p class="hint">아래 칸을 눌러 상태를 선택하세요. 같은 칸을 다시 누르면 표시가 지워집니다.</p>
+
+    <div class="table-wrap">
+      <table id="rpsTable" aria-label="셋페스 취향표"></table>
+    </div>
+
+    <div class="actions">
+      <button id="reset">전체 초기화</button>
+      <button id="save">이미지로 저장</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
