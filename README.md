@@ -12,7 +12,7 @@
 ## 멤버 변경
 `script.js`의 아래 부분만 수정하면 됩니다.
 
-const members = ["오율", "룰", "우진", "루이"];
+const members = ["오율", "률", "우진", "루이"];
 
 예:
 const members = ["A", "B", "C", "D", "E"];
