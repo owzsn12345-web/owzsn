@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>샷페스 취향표</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>샷페스 취향표</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<main class="wrap">
-  <h1>샷페스 취향표</h1>
 
-  <div class="legend">
-    <span><i class="c-otp"></i>OTP</span>
-    <span><i class="c-good"></i>좋아함</span>
-    <span><i class="c-like"></i>호감</span>
-    <span><i class="c-interest"></i>관심있음</span>
-    <span><i class="c-none"></i>관심없음</span>
-    <span><i class="c-special"></i>별로</span>
-    <span><i class="c-hate"></i>지뢰</span>
+  <div class="wrap">
+
+    <h1>샷페스 취향표</h1>
+
+    <div id="picker" class="picker">
+      <button data-color="otp"><i class="c-otp"></i>OTP</button>
+      <button data-color="good"><i class="c-good"></i>좋아함</button>
+      <button data-color="like"><i class="c-like"></i>호감</button>
+      <button data-color="interest"><i class="c-interest"></i>관심있음</button>
+      <button data-color="none"><i class="c-none"></i>관심없음</button>
+      <button data-color="special"><i class="c-special"></i>별로</button>
+      <button data-color="hate"><i class="c-hate"></i>지뢰</button>
+      <button data-color="clear" class="clear">색 지우기</button>
+    </div>
+
+    <div class="legend">
+      <span><i class="c-otp"></i>OTP</span>
+      <span><i class="c-good"></i>좋아함</span>
+      <span><i class="c-like"></i>호감</span>
+      <span><i class="c-interest"></i>관심있음</span>
+      <span><i class="c-none"></i>관심없음</span>
+      <span><i class="c-special"></i>별로</span>
+      <span><i class="c-hate"></i>지뢰</span>
+    </div>
+
+    <table id="chart"></table>
+
+    <div class="buttons">
+      <button id="reset">전체 초기화</button>
+      <button id="save">이미지로 저장</button>
+    </div>
+
   </div>
 
-  <table id="chart"></table>
+  <script src="script.js"></script>
 
-  <div class="buttons">
-    <button id="reset">전체 초기화</button>
-    <button id="save">이미지로 저장</button>
-  </div>
-</main>
-
-<div id="picker" class="picker">
-  <button data-color="otp"><i class="c-otp"></i>OTP</button>
-  <button data-color="good"><i class="c-good"></i>좋아함</button>
-  <button data-color="like"><i class="c-like"></i>호감</button>
-  <button data-color="interest"><i class="c-interest"></i>관심있음</button>
-  <button data-color="none"><i class="c-none"></i>관심없음</button>
-  <button data-color="special"><i class="c-special"></i>별로</button>
-  <button data-color="hate"><i class="c-hate"></i>지뢰</button>
-  <button data-color="clear" class="clear">색 지우기</button>
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>
