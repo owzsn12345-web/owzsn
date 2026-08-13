@@ -6,8 +6,10 @@ html,
 body {
   margin: 0;
   padding: 0;
+
   background: #ffffff;
   color: #111111;
+
   font-family:
     "Noto Sans KR",
     "Apple SD Gothic Neo",
@@ -19,29 +21,30 @@ body {
   min-height: 100vh;
 }
 
+
+/* =================================
+   전체
+================================= */
+
 main {
   width: 100%;
-  text-align: center;
+
   padding: 40px 20px 60px;
+
+  text-align: center;
 }
 
 
-/* ==================================================
-   ★★★ 이미지로 저장되는 전체 영역 ★★★
-   
-   여기의 padding이
-   "저장된 사진의 여백"임
-================================================== */
+/* =================================
+   이미지 저장 영역
+================================= */
 
 #captureArea {
 
-  /* 저장 이미지의 기본 크기 */
   width: 1100px;
 
-  /* 가운데 정렬 */
   margin: 0 auto;
 
-  /* ★ 저장 사진 바깥쪽 여백 */
   padding: 100px 90px 110px;
 
   background: #ffffff;
@@ -50,16 +53,15 @@ main {
 }
 
 
-/* ==================================================
+/* =================================
    제목
-================================================== */
+================================= */
 
 h1 {
 
-  /* 무조건 가운데 */
-  text-align: center;
-
   margin: 0 0 55px;
+
+  text-align: center;
 
   font-size: 48px;
 
@@ -73,9 +75,9 @@ h1 {
 }
 
 
-/* ==================================================
-   색상 설명
-================================================== */
+/* =================================
+   색상 범례
+================================= */
 
 .legend {
 
@@ -92,8 +94,6 @@ h1 {
   margin-bottom: 35px;
 
   font-size: 17px;
-
-  line-height: 1;
 }
 
 .legend span {
@@ -114,16 +114,17 @@ h1 {
   width: 24px;
   height: 24px;
 
+  min-width: 24px;
+
   border-radius: 50%;
 
   border: 1px solid #aaaaaa;
-
 }
 
 
-/* ==================================================
+/* =================================
    색상
-================================================== */
+================================= */
 
 .c-otp {
   background: #f3a3c5;
@@ -154,9 +155,9 @@ h1 {
 }
 
 
-/* ==================================================
+/* =================================
    표
-================================================== */
+================================= */
 
 .table-wrap {
 
@@ -171,11 +172,11 @@ table {
 
   width: 100%;
 
+  table-layout: fixed;
+
   border-collapse: separate;
 
   border-spacing: 0;
-
-  table-layout: fixed;
 
   border: 1px solid #dddddd;
 
@@ -206,7 +207,7 @@ td {
 }
 
 
-/* 위쪽 + 왼쪽 이름 */
+/* 행 / 열 이름 */
 
 th {
 
@@ -236,9 +237,9 @@ td {
 }
 
 
-/* ==================================================
-   색칠된 칸
-================================================== */
+/* =================================
+   선택된 색
+================================= */
 
 td[data-color="otp"] {
   background: #f3a3c5 !important;
@@ -269,9 +270,9 @@ td[data-color="hate"] {
 }
 
 
-/* ==================================================
-   색상 선택창
-================================================== */
+/* =================================
+   ★ 색상 선택창
+================================= */
 
 .picker {
 
@@ -279,9 +280,21 @@ td[data-color="hate"] {
 
   display: none;
 
-  z-index: 9999;
+  z-index: 99999;
 
-  width: 180px;
+  width: 190px;
+
+  /*
+    화면보다 커지지 않음
+  */
+  max-height: calc(100vh - 20px);
+
+  /*
+    ★ 항목이 넘치면 여기서 스크롤
+  */
+  overflow-y: auto;
+
+  overflow-x: hidden;
 
   padding: 8px;
 
@@ -293,23 +306,43 @@ td[data-color="hate"] {
 
   box-shadow:
     0 8px 30px rgba(0, 0, 0, 0.15);
+
+  /*
+    아이폰 / 아이패드 스크롤
+  */
+  -webkit-overflow-scrolling: touch;
+
+  /*
+    스크롤바 때문에 내용 잘리지 않게
+  */
+  scrollbar-width: thin;
 }
+
+
+/* 선택창 표시 */
 
 .picker.show {
   display: block;
 }
 
+
+/* =================================
+   선택창 버튼
+================================= */
+
 .picker button {
 
   width: 100%;
+
+  min-height: 44px;
 
   display: flex;
 
   align-items: center;
 
-  gap: 8px;
+  gap: 9px;
 
-  padding: 8px;
+  padding: 9px 8px;
 
   border: 0;
 
@@ -317,26 +350,41 @@ td[data-color="hate"] {
 
   background: #ffffff;
 
+  color: #111111;
+
   font-size: 14px;
 
   text-align: left;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
 }
 
 .picker button:hover {
+
   background: #f2f2f2;
 }
+
+
+/* 선택창 원 */
 
 .picker i {
 
   display: inline-block;
 
-  width: 22px;
-  height: 22px;
+  width: 23px;
+  height: 23px;
+
+  min-width: 23px;
 
   border-radius: 50%;
 
   border: 1px solid #aaaaaa;
 }
+
+
+/* 색 지우기 */
 
 .picker .clear {
 
@@ -346,10 +394,9 @@ td[data-color="hate"] {
 }
 
 
-/* ==================================================
-   사이트에서만 보이는 버튼
-   → 이미지 저장에는 안 들어감
-================================================== */
+/* =================================
+   사이트 버튼
+================================= */
 
 .actions {
 
@@ -380,49 +427,58 @@ td[data-color="hate"] {
 }
 
 .actions button:hover {
+
   background: #f5f5f5;
 }
 
 
-/* ==================================================
-   작은 화면에서도 사이트에서 볼 수 있게
-================================================== */
+/* =================================
+   작은 화면
+================================= */
 
 @media (max-width: 1150px) {
 
   #captureArea {
 
-    /*
-     * 화면에서는 줄여서 보이지만
-     * 이미지 저장 시에는 위의 1100px 영역을 기준으로 저장
-     */
     width: 100%;
 
     padding: 70px 40px 80px;
+
   }
 
 }
 
 
+/* =================================
+   아이폰 / 아이패드
+================================= */
+
 @media (max-width: 700px) {
 
   main {
+
     padding: 25px 10px 50px;
+
   }
+
 
   #captureArea {
 
     width: 100%;
 
     padding: 55px 15px 65px;
+
   }
+
 
   h1 {
 
     font-size: 32px;
 
     margin-bottom: 35px;
+
   }
+
 
   .legend {
 
@@ -431,13 +487,19 @@ td[data-color="hate"] {
     font-size: 12px;
 
     margin-bottom: 22px;
+
   }
+
 
   .legend i {
 
     width: 18px;
     height: 18px;
+
+    min-width: 18px;
+
   }
+
 
   th,
   td {
@@ -445,16 +507,34 @@ td[data-color="hate"] {
     height: 65px;
 
     padding: 4px 2px;
+
   }
+
 
   th {
 
     font-size: 16px;
+
   }
+
 
   td {
 
     font-size: 14px;
+
+  }
+
+
+  /*
+    모바일 선택창
+  */
+
+  .picker {
+
+    width: 185px;
+
+    max-height: calc(100vh - 16px);
+
   }
 
 }
