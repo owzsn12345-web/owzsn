@@ -34,13 +34,10 @@ members.forEach((row, r) => {
     if (r === c) {
 
       td.textContent = "—";
-      td.style.background = "#fff";
 
     } else {
 
-      /*
-        우진 × 률 = 딘룰
-      */
+      /* 우진 × 률 = 딘룰 */
       if (row === "닟" && col === "룰") {
         td.textContent = "딘룰";
       } else {
@@ -96,13 +93,13 @@ picker.addEventListener("click", e => {
   }
 
   picker.classList.remove("show");
-
   selectedCell = null;
+
 });
 
 
 /* =========================
-   바깥 클릭하면 선택창 닫기
+   선택창 닫기
 ========================= */
 
 document.addEventListener("click", e => {
@@ -134,23 +131,39 @@ document.getElementById("reset").onclick = () => {
 
 /* =========================
    이미지 저장
-   제목 + 항목 + 표 전체 저장
+   제목 + 항목 + 표 전체
 ========================= */
 
 document.getElementById("save").onclick = async () => {
 
   const target = document.getElementById("captureArea");
 
-  /* 선택창은 이미지에 나오지 않게 */
+  /* 색상 선택창 숨기기 */
   picker.classList.remove("show");
 
   try {
 
     const canvas = await html2canvas(target, {
+
+      /*
+       * 저장 이미지의 흰색 여백
+       */
       backgroundColor: "#ffffff",
+
+      /*
+       * 화질
+       */
       scale: 2,
+
+      /*
+       * 이미지가 잘리지 않게
+       */
+      width: target.scrollWidth,
+      height: target.scrollHeight,
+
       useCORS: true,
       logging: false
+
     });
 
     const link = document.createElement("a");
@@ -165,7 +178,10 @@ document.getElementById("save").onclick = async () => {
 
     console.error(error);
 
-    alert("이미지 저장에 실패했어요. 페이지를 새로고침한 뒤 다시 눌러주세요.");
+    alert(
+      "이미지 저장에 실패했어요. " +
+      "페이지를 새로고침한 뒤 다시 시도해주세요."
+    );
 
   }
 
