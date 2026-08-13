@@ -2,10 +2,12 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
   background: #ffffff;
-  color: #111;
+  color: #111111;
   font-family:
     "Noto Sans KR",
     "Apple SD Gothic Neo",
@@ -13,70 +15,115 @@ body {
     sans-serif;
 }
 
+body {
+  min-height: 100vh;
+}
+
 main {
-  width: min(920px, 94vw);
+  width: 100%;
+  text-align: center;
+  padding: 40px 20px 60px;
+}
+
+
+/* ==================================================
+   ★★★ 이미지로 저장되는 전체 영역 ★★★
+   
+   여기의 padding이
+   "저장된 사진의 여백"임
+================================================== */
+
+#captureArea {
+
+  /* 저장 이미지의 기본 크기 */
+  width: 1100px;
+
+  /* 가운데 정렬 */
   margin: 0 auto;
-  padding: 40px 0 60px;
+
+  /* ★ 저장 사진 바깥쪽 여백 */
+  padding: 100px 90px 110px;
+
+  background: #ffffff;
+
   text-align: center;
 }
 
 
-/* =========================
-   이미지로 저장될 영역
-========================= */
-
-#captureArea {
-  background: #ffffff;
-  padding: 20px 10px 35px;
-}
-
-
-/* =========================
+/* ==================================================
    제목
-========================= */
+================================================== */
 
 h1 {
-  margin: 0 0 42px;
-  font-size: 42px;
+
+  /* 무조건 가운데 */
+  text-align: center;
+
+  margin: 0 0 55px;
+
+  font-size: 48px;
+
+  line-height: 1.2;
+
   font-weight: 800;
+
   letter-spacing: -2px;
+
+  color: #111111;
 }
 
 
-/* =========================
+/* ==================================================
    색상 설명
-========================= */
+================================================== */
 
 .legend {
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
+
   flex-wrap: wrap;
-  gap: 18px;
-  margin-bottom: 25px;
-  font-size: 16px;
+
+  gap: 22px;
+
+  margin-bottom: 35px;
+
+  font-size: 17px;
+
+  line-height: 1;
 }
 
 .legend span {
+
   display: flex;
+
   align-items: center;
-  gap: 7px;
+
+  gap: 8px;
+
   white-space: nowrap;
 }
 
-.legend i,
-.picker i {
+.legend i {
+
   display: inline-block;
-  width: 25px;
-  height: 25px;
+
+  width: 24px;
+  height: 24px;
+
   border-radius: 50%;
-  border: 1px solid #aaa;
+
+  border: 1px solid #aaaaaa;
+
 }
 
 
-/* =========================
+/* ==================================================
    색상
-========================= */
+================================================== */
 
 .c-otp {
   background: #f3a3c5;
@@ -107,65 +154,91 @@ h1 {
 }
 
 
-/* =========================
+/* ==================================================
    표
-========================= */
+================================================== */
 
 .table-wrap {
+
   width: 100%;
+
+  margin: 0 auto;
+
   overflow: visible;
 }
 
 table {
+
   width: 100%;
+
   border-collapse: separate;
+
   border-spacing: 0;
+
   table-layout: fixed;
+
+  border: 1px solid #dddddd;
+
+  border-radius: 18px;
+
   overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid #ddd;
+
+  background: #ffffff;
 }
+
+
+/* 표 칸 */
 
 th,
 td {
-  height: 82px;
+
+  height: 88px;
+
   padding: 10px;
-  border-right: 1px solid #ffffff;
-  border-bottom: 1px solid #ffffff;
+
   text-align: center;
+
   vertical-align: middle;
+
+  border-right: 1px solid #ffffff;
+
+  border-bottom: 1px solid #ffffff;
 }
 
+
+/* 위쪽 + 왼쪽 이름 */
+
 th {
+
   background: #079fc8;
+
   color: #ffffff;
-  font-size: 22px;
+
+  font-size: 24px;
+
   font-weight: 800;
 }
 
+
+/* 일반 칸 */
+
 td {
+
   background: #ffffff;
+
   color: #111111;
-  font-size: 20px;
+
+  font-size: 21px;
+
   font-weight: 600;
+
   cursor: pointer;
-  transition: transform 0.1s;
-}
-
-td:hover {
-  transform: scale(1.02);
 }
 
 
-/* 자기 자신 */
-td[style*="#fff"] {
-  cursor: default;
-}
-
-
-/* =========================
-   선택된 색상
-========================= */
+/* ==================================================
+   색칠된 칸
+================================================== */
 
 td[data-color="otp"] {
   background: #f3a3c5 !important;
@@ -196,20 +269,26 @@ td[data-color="hate"] {
 }
 
 
-/* =========================
+/* ==================================================
    색상 선택창
-========================= */
+================================================== */
 
 .picker {
+
   position: fixed;
+
   display: none;
+
   z-index: 9999;
 
   width: 180px;
+
   padding: 8px;
 
   background: #ffffff;
-  border: 1px solid #ddd;
+
+  border: 1px solid #dddddd;
+
   border-radius: 14px;
 
   box-shadow:
@@ -221,18 +300,25 @@ td[data-color="hate"] {
 }
 
 .picker button {
+
   width: 100%;
+
   display: flex;
+
   align-items: center;
+
   gap: 8px;
 
   padding: 8px;
 
   border: 0;
+
   border-radius: 8px;
+
   background: #ffffff;
 
   font-size: 14px;
+
   text-align: left;
 }
 
@@ -240,33 +326,56 @@ td[data-color="hate"] {
   background: #f2f2f2;
 }
 
+.picker i {
+
+  display: inline-block;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  border: 1px solid #aaaaaa;
+}
+
 .picker .clear {
-  margin-top: 4px;
-  border-top: 1px solid #eee;
+
+  margin-top: 5px;
+
+  border-top: 1px solid #eeeeee;
 }
 
 
-/* =========================
-   아래 버튼
-========================= */
+/* ==================================================
+   사이트에서만 보이는 버튼
+   → 이미지 저장에는 안 들어감
+================================================== */
 
 .actions {
+
   display: flex;
+
   justify-content: center;
+
   gap: 12px;
-  margin-top: 20px;
+
+  margin-top: 25px;
 }
 
 .actions button {
+
   padding: 11px 20px;
 
-  border: 1px solid #aaa;
+  border: 1px solid #aaaaaa;
+
   border-radius: 10px;
 
   background: #ffffff;
+
   color: #168ac1;
 
   font-size: 15px;
+
   cursor: pointer;
 }
 
@@ -275,48 +384,76 @@ td[data-color="hate"] {
 }
 
 
-/* =========================
-   아이패드/휴대폰
-========================= */
+/* ==================================================
+   작은 화면에서도 사이트에서 볼 수 있게
+================================================== */
+
+@media (max-width: 1150px) {
+
+  #captureArea {
+
+    /*
+     * 화면에서는 줄여서 보이지만
+     * 이미지 저장 시에는 위의 1100px 영역을 기준으로 저장
+     */
+    width: 100%;
+
+    padding: 70px 40px 80px;
+  }
+
+}
+
 
 @media (max-width: 700px) {
 
   main {
-    width: 96vw;
-    padding-top: 25px;
+    padding: 25px 10px 50px;
   }
 
   #captureArea {
-    padding: 15px 5px 30px;
+
+    width: 100%;
+
+    padding: 55px 15px 65px;
   }
 
   h1 {
-    font-size: 30px;
-    margin-bottom: 28px;
+
+    font-size: 32px;
+
+    margin-bottom: 35px;
   }
 
   .legend {
+
     gap: 10px;
+
     font-size: 12px;
-    margin-bottom: 18px;
+
+    margin-bottom: 22px;
   }
 
   .legend i {
+
     width: 18px;
     height: 18px;
   }
 
   th,
   td {
+
     height: 65px;
-    padding: 5px 2px;
+
+    padding: 4px 2px;
   }
 
   th {
+
     font-size: 16px;
   }
 
   td {
+
     font-size: 14px;
   }
 
