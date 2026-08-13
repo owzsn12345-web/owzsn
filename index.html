@@ -4,47 +4,83 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>샷페스 취향표</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
 
-<main>
+  <main>
 
-  <!-- 이 영역 전체가 이미지로 저장됨 -->
-  <div id="captureArea">
+    <!-- ★ 여기 안에 있는 것들이 이미지로 저장됨 -->
+    <div id="captureArea">
 
-    <h1>샷페스 취향표</h1>
+      <h1>샷페스 취향표</h1>
 
-    <!-- 색상 설명 -->
-    <div class="legend">
-      <span><i class="c-otp"></i>OTP</span>
-      <span><i class="c-good"></i>좋아함</span>
-      <span><i class="c-like"></i>호감</span>
-      <span><i class="c-interest"></i>관심있음</span>
-      <span><i class="c-none"></i>관심없음</span>
-      <span><i class="c-special"></i>별로</span>
-      <span><i class="c-hate"></i>지뢰</span>
+      <!-- 색상 설명 -->
+      <div class="legend">
+        <span><i class="c-otp"></i>OTP</span>
+        <span><i class="c-good"></i>좋아함</span>
+        <span><i class="c-like"></i>호감</span>
+        <span><i class="c-interest"></i>관심있음</span>
+        <span><i class="c-none"></i>관심없음</span>
+        <span><i class="c-special"></i>별로</span>
+        <span><i class="c-hate"></i>지뢰</span>
+      </div>
+
+      <div class="table-wrap">
+        <table id="chart"></table>
+      </div>
+
     </div>
 
-    <div class="table-wrap">
-      <table id="chart"></table>
+    <!-- ★ 색깔 선택창은 captureArea 밖에 있어야 함 -->
+    <div id="picker" class="picker">
+
+      <button data-color="otp">
+        <i class="c-otp"></i>OTP
+      </button>
+
+      <button data-color="good">
+        <i class="c-good"></i>좋아함
+      </button>
+
+      <button data-color="like">
+        <i class="c-like"></i>호감
+      </button>
+
+      <button data-color="interest">
+        <i class="c-interest"></i>관심있음
+      </button>
+
+      <button data-color="none">
+        <i class="c-none"></i>관심없음
+      </button>
+
+      <button data-color="special">
+        <i class="c-special"></i>별로</button>
+
+      <button data-color="hate">
+        <i class="c-hate"></i>지뢰
+      </button>
+
+      <button data-color="clear" class="clear">
+        색 지우기
+      </button>
+
     </div>
 
-  </div>
+    <!-- 화면에서만 보이는 버튼 -->
+    <div class="actions">
+      <button id="reset">전체 초기화</button>
+      <button id="save">이미지로 저장</button>
+    </div>
 
-  <!-- 화면에서만 보이는 버튼 -->
-  <div class="actions">
-    <button id="reset">전체 초기화</button>
-    <button id="save">이미지로 저장</button>
-  </div>
+  </main>
 
-</main>
-
-<!-- 이미지 저장 기능 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
