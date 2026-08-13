@@ -7,9 +7,9 @@ const picker = document.getElementById("picker");
 let selectedCell = null;
 
 
-// =========================
+// ==========================
 // 표 만들기
-// =========================
+// ==========================
 
 const head = document.createElement("tr");
 
@@ -24,6 +24,7 @@ members.forEach((row, r) => {
 
   const tr = document.createElement("tr");
 
+  // 왼쪽 행 이름
   tr.innerHTML = `<th>${displayNames[r]}</th>`;
 
   members.forEach((col, c) => {
@@ -34,17 +35,17 @@ members.forEach((row, r) => {
     if (r === c) {
 
       td.textContent = "—";
-      td.style.background = "#fff";
 
     } else {
 
-      // 우진 × 률 = 딘룰
+      // 닟룰만 딘룰
       if (row === "닟" && col === "룰") {
         td.textContent = "딘룰";
       } else {
         td.textContent = row + col;
       }
 
+      // 칸 클릭
       td.addEventListener("click", e => {
 
         selectedCell = td;
@@ -52,14 +53,18 @@ members.forEach((row, r) => {
         const rect = td.getBoundingClientRect();
 
         picker.style.left =
-          Math.min(rect.left, window.innerWidth - 190) + "px";
+          Math.min(
+            rect.left,
+            window.innerWidth - 190
+          ) + "px";
 
         picker.style.top =
-          (rect.bottom + 6) + "px";
+          rect.bottom + 6 + "px";
 
         picker.classList.add("show");
 
         e.stopPropagation();
+
       });
 
     }
@@ -73,22 +78,26 @@ members.forEach((row, r) => {
 });
 
 
-// =========================
-// 색상 선택
-// =========================
+// ==========================
+// 색깔 선택
+// ==========================
 
 picker.addEventListener("click", e => {
 
-  const btn = e.target.closest("button");
+  const button = e.target.closest("button");
 
-  if (!btn || !selectedCell) return;
+  if (!button || !selectedCell) return;
 
-  const color = btn.dataset.color;
+  const color = button.dataset.color;
 
   if (color === "clear") {
+
     selectedCell.removeAttribute("data-color");
+
   } else {
+
     selectedCell.dataset.color = color;
+
   }
 
   picker.classList.remove("show");
@@ -98,9 +107,9 @@ picker.addEventListener("click", e => {
 });
 
 
-// =========================
-// 바깥 클릭하면 색상 메뉴 닫기
-// =========================
+// ==========================
+// 바깥 누르면 선택창 닫기
+// ==========================
 
 document.addEventListener("click", e => {
 
@@ -108,49 +117,93 @@ document.addEventListener("click", e => {
     !e.target.closest("#picker") &&
     !e.target.closest("td")
   ) {
+
     picker.classList.remove("show");
+
   }
 
 });
 
 
-// =========================
+// ==========================
 // 전체 초기화
-// =========================
+// ==========================
 
 document.getElementById("reset").onclick = () => {
 
   document
-    .querySelectorAll("td[data-color]")
+    .querySelectorAll("#chart td[data-color]")
     .forEach(td => {
+
       td.removeAttribute("data-color");
+
     });
 
 };
 
 
-// =========================
+// ==========================
 // 전체 이미지 저장
-// =========================
+// ==========================
 
 document.getElementById("save").onclick = async () => {
 
+  // 색깔 선택창 숨기기
   picker.classList.remove("show");
 
-  const target = document.querySelector(".wrap");
+  // 저장할 영역
+  const captureArea =
+    document.getElementById("captureArea");
 
-  const canvas = await html2canvas(target, {
-    backgroundColor: "#ffffff",
-    scale: 2,
-    useCORS: true
-  });
+  try {
 
-  const link = document.createElement("a");
+    const canvas = await html2canvas(
+      captureArea,
+      {
+        backgroundColor: "#ffffff",
 
-  link.download = "샷페스_취향표.png";
+        scale: 3,
 
-  link.href = canvas.toDataURL("image/png");
+        useCORS: true,
 
-  link.click();
+        logging: false,
+
+        // 화면에 실제 보이는 크기 그대로 캡처
+        width: captureArea.scrollWidth,
+
+        height: captureArea.scrollHeight
+      }
+    );
+
+
+    // PNG 생성
+    const image =
+      canvas.toDataURL("image/png");
+
+
+    // 다운로드
+    const link =
+      document.createElement("a");
+
+    link.download =
+      "샷페스_취향표.png";
+
+    link.href = image;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "이미지 저장에 실패했어요. 페이지를 새로고침한 후 다시 시도해주세요."
+    );
+
+  }
 
 };
