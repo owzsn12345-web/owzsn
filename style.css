@@ -1,38 +1,323 @@
-*{box-sizing:border-box}
-body{margin:0;background:#fff;color:#111;font-family:"Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif}
-.wrap{width:min(900px,94vw);margin:55px auto 50px;text-align:center}
-h1{font-size:clamp(34px,5vw,52px);margin:0 0 38px;font-weight:800;letter-spacing:-.07em}
-.legend{display:flex;justify-content:center;flex-wrap:wrap;gap:16px 22px;margin-bottom:28px;font-size:18px}
-.legend span{display:flex;align-items:center;gap:7px;white-space:nowrap}
-.legend i,.picker i{display:inline-block;width:22px;height:22px;border-radius:50%;border:1px solid #aaa}
-.c-otp{background:#f5a8c8;border-color:#f5a8c8!important}
-.c-good{background:#ffaaa5;border-color:#ffaaa5!important}
-.c-like{background:#ffe68d;border-color:#ffe68d!important}
-.c-interest{background:#a9e39a;border-color:#a9e39a!important}
-.c-none{background:#fff}
-.c-special{background:#b9e5f5;border-color:#b9e5f5!important}
-.c-hate{background:#9c9c9c;border-color:#9c9c9c!important}
-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;overflow:hidden;border-radius:12px}
-th,td{border-right:1px solid #fff;border-bottom:1px solid #fff;height:78px;text-align:center;font-size:22px}
-th{background:#08a5d2;color:white;font-weight:700}
-tr:first-child th:first-child{border-top-left-radius:12px}
-tr:first-child th:last-child{border-top-right-radius:12px}
-tr:last-child th:first-child{border-bottom-left-radius:12px}
-tr:last-child td:last-child{border-bottom-right-radius:12px}
-td{background:#fff;cursor:pointer;font-weight:500;transition:.12s}
-td:hover{filter:brightness(.98)}
-td[data-color=otp]{background:#f5a8c8}
-td[data-color=good]{background:#ffaaa5}
-td[data-color=like]{background:#ffe68d}
-td[data-color=interest]{background:#a9e39a}
-td[data-color=none]{background:#fff}
-td[data-color=special]{background:#b9e5f5}
-td[data-color=hate]{background:#9c9c9c}
-.buttons{margin-top:22px;display:flex;justify-content:center;gap:10px}
-.buttons button{background:white;border:1px solid #aaa;border-radius:8px;padding:9px 15px;font-family:inherit}
-.picker{position:fixed;display:none;z-index:10;background:#fff;border:1px solid #bbb;border-radius:12px;padding:7px;box-shadow:0 8px 30px #0002}
-.picker.show{display:flex;flex-direction:column}
-.picker button{border:0;background:#fff;border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:8px;font:15px "Noto Sans KR",sans-serif;text-align:left}
-.picker button:hover{background:#f3f3f3}
-.picker .clear{margin-top:3px;border-top:1px solid #eee}
-@media(max-width:650px){.wrap{margin-top:30px}.legend{font-size:15px;gap:10px 13px}.legend i{width:18px;height:18px}th,td{height:65px;font-size:18px}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #111;
+  font-family:
+    "Noto Sans KR",
+    "Apple SD Gothic Neo",
+    Arial,
+    sans-serif;
+}
+
+main {
+  width: min(920px, 94vw);
+  margin: 0 auto;
+  padding: 40px 0 60px;
+  text-align: center;
+}
+
+
+/* =========================
+   이미지로 저장될 영역
+========================= */
+
+#captureArea {
+  background: #ffffff;
+  padding: 20px 10px 35px;
+}
+
+
+/* =========================
+   제목
+========================= */
+
+h1 {
+  margin: 0 0 42px;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+
+/* =========================
+   색상 설명
+========================= */
+
+.legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 25px;
+  font-size: 16px;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.legend i,
+.picker i {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+}
+
+
+/* =========================
+   색상
+========================= */
+
+.c-otp {
+  background: #f3a3c5;
+}
+
+.c-good {
+  background: #f6aaa5;
+}
+
+.c-like {
+  background: #ffe58b;
+}
+
+.c-interest {
+  background: #9edb91;
+}
+
+.c-none {
+  background: #ffffff;
+}
+
+.c-special {
+  background: #a9dff0;
+}
+
+.c-hate {
+  background: #999999;
+}
+
+
+/* =========================
+   표
+========================= */
+
+.table-wrap {
+  width: 100%;
+  overflow: visible;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  height: 82px;
+  padding: 10px;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  background: #079fc8;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+td {
+  background: #ffffff;
+  color: #111111;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+td:hover {
+  transform: scale(1.02);
+}
+
+
+/* 자기 자신 */
+td[style*="#fff"] {
+  cursor: default;
+}
+
+
+/* =========================
+   선택된 색상
+========================= */
+
+td[data-color="otp"] {
+  background: #f3a3c5 !important;
+}
+
+td[data-color="good"] {
+  background: #f6aaa5 !important;
+}
+
+td[data-color="like"] {
+  background: #ffe58b !important;
+}
+
+td[data-color="interest"] {
+  background: #9edb91 !important;
+}
+
+td[data-color="none"] {
+  background: #ffffff !important;
+}
+
+td[data-color="special"] {
+  background: #a9dff0 !important;
+}
+
+td[data-color="hate"] {
+  background: #999999 !important;
+}
+
+
+/* =========================
+   색상 선택창
+========================= */
+
+.picker {
+  position: fixed;
+  display: none;
+  z-index: 9999;
+
+  width: 180px;
+  padding: 8px;
+
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.picker.show {
+  display: block;
+}
+
+.picker button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px;
+
+  border: 0;
+  border-radius: 8px;
+  background: #ffffff;
+
+  font-size: 14px;
+  text-align: left;
+}
+
+.picker button:hover {
+  background: #f2f2f2;
+}
+
+.picker .clear {
+  margin-top: 4px;
+  border-top: 1px solid #eee;
+}
+
+
+/* =========================
+   아래 버튼
+========================= */
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.actions button {
+  padding: 11px 20px;
+
+  border: 1px solid #aaa;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #168ac1;
+
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: #f5f5f5;
+}
+
+
+/* =========================
+   아이패드/휴대폰
+========================= */
+
+@media (max-width: 700px) {
+
+  main {
+    width: 96vw;
+    padding-top: 25px;
+  }
+
+  #captureArea {
+    padding: 15px 5px 30px;
+  }
+
+  h1 {
+    font-size: 30px;
+    margin-bottom: 28px;
+  }
+
+  .legend {
+    gap: 10px;
+    font-size: 12px;
+    margin-bottom: 18px;
+  }
+
+  .legend i {
+    width: 18px;
+    height: 18px;
+  }
+
+  th,
+  td {
+    height: 65px;
+    padding: 5px 2px;
+  }
+
+  th {
+    font-size: 16px;
+  }
+
+  td {
+    font-size: 14px;
+  }
+
+}
