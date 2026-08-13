@@ -7,9 +7,9 @@ const picker = document.getElementById("picker");
 let selectedCell = null;
 
 
-/* =========================
-   표 만들기
-========================= */
+/* ================================
+   표 생성
+================================ */
 
 const head = document.createElement("tr");
 
@@ -24,7 +24,6 @@ members.forEach((row, r) => {
 
   const tr = document.createElement("tr");
 
-  // 왼쪽 행 이름
   tr.innerHTML = `<th>${displayNames[r]}</th>`;
 
   members.forEach((col, c) => {
@@ -38,32 +37,83 @@ members.forEach((row, r) => {
 
     } else {
 
-      // 닟 + 룰 = 딘룰
+      // 우진 × 률 = 딘룰
       if (row === "닟" && col === "룰") {
         td.textContent = "딘룰";
       } else {
         td.textContent = row + col;
       }
 
-      // 칸 클릭 → 색깔 선택창
-      td.addEventListener("click", e => {
+      // 칸 누르기
+      td.addEventListener("click", (e) => {
+
+        e.stopPropagation();
 
         selectedCell = td;
 
-        const rect = td.getBoundingClientRect();
-
-        picker.style.left =
-          Math.min(
-            rect.left,
-            window.innerWidth - 190
-          ) + "px";
-
-        picker.style.top =
-          (rect.bottom + 6) + "px";
-
+        // 선택창 먼저 표시
         picker.classList.add("show");
 
-        e.stopPropagation();
+        // 위치 초기화
+        picker.style.left = "0px";
+        picker.style.top = "0px";
+
+        requestAnimationFrame(() => {
+
+          const rect = td.getBoundingClientRect();
+
+          const pickerWidth = 190;
+          const pickerHeight = picker.offsetHeight;
+
+          const gap = 8;
+          const margin = 10;
+
+          const screenWidth = window.innerWidth;
+          const screenHeight = window.innerHeight;
+
+
+          /* ----------------------------
+             가로 위치
+          ---------------------------- */
+
+          let left = rect.left;
+
+          if (left + pickerWidth > screenWidth - margin) {
+            left = screenWidth - pickerWidth - margin;
+          }
+
+          if (left < margin) {
+            left = margin;
+          }
+
+
+          /* ----------------------------
+             세로 위치
+          ---------------------------- */
+
+          // 기본: 칸 아래
+          let top = rect.bottom + gap;
+
+          // 아래 공간 부족 → 칸 위
+          if (
+            top + pickerHeight >
+            screenHeight - margin
+          ) {
+
+            top = rect.top - pickerHeight - gap;
+
+          }
+
+          // 위쪽도 부족하면 화면 위쪽에 고정
+          if (top < margin) {
+            top = margin;
+          }
+
+
+          picker.style.left = `${left}px`;
+          picker.style.top = `${top}px`;
+
+        });
 
       });
 
@@ -78,40 +128,50 @@ members.forEach((row, r) => {
 });
 
 
-/* =========================
+/* ================================
    색깔 선택
-========================= */
+================================ */
 
-picker.addEventListener("click", e => {
+picker.addEventListener("click", (e) => {
 
   const button = e.target.closest("button");
 
-  if (!button || !selectedCell) return;
+  if (!button || !selectedCell) {
+    return;
+  }
 
   const color = button.dataset.color;
 
+
+  // 색 지우기
   if (color === "clear") {
 
     selectedCell.removeAttribute("data-color");
 
-  } else {
+  }
+
+  // 색 적용
+  else {
 
     selectedCell.dataset.color = color;
 
   }
 
+
   picker.classList.remove("show");
 
   selectedCell = null;
 
+  e.stopPropagation();
+
 });
 
 
-/* =========================
-   화면 아무 곳 클릭
-========================= */
+/* ================================
+   바깥 클릭 → 선택창 닫기
+================================ */
 
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
 
   if (
     !e.target.closest("#picker") &&
@@ -120,14 +180,29 @@ document.addEventListener("click", e => {
 
     picker.classList.remove("show");
 
+    selectedCell = null;
+
   }
 
 });
 
 
-/* =========================
+/* ================================
+   화면 크기 변경 → 닫기
+================================ */
+
+window.addEventListener("resize", () => {
+
+  picker.classList.remove("show");
+
+  selectedCell = null;
+
+});
+
+
+/* ================================
    전체 초기화
-========================= */
+================================ */
 
 document.getElementById("reset").addEventListener("click", () => {
 
@@ -140,16 +215,18 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 
-/* =========================
+/* ================================
    이미지 저장
-========================= */
+================================ */
 
 document.getElementById("save").addEventListener("click", async () => {
 
-  // 색깔 선택창 숨김
+  // 선택창 숨기기
   picker.classList.remove("show");
+  selectedCell = null;
 
-  const target = document.getElementById("captureArea");
+  const target =
+    document.getElementById("captureArea");
 
   try {
 
@@ -169,11 +246,16 @@ document.getElementById("save").addEventListener("click", async () => {
 
     });
 
-    const image = canvas.toDataURL("image/png");
 
-    const link = document.createElement("a");
+    const image =
+      canvas.toDataURL("image/png");
 
-    link.download = "샷페스_취향표.png";
+
+    const link =
+      document.createElement("a");
+
+    link.download =
+      "샷페스_취향표.png";
 
     link.href = image;
 
@@ -188,8 +270,8 @@ document.getElementById("save").addEventListener("click", async () => {
     console.error(error);
 
     alert(
-      "이미지 저장에 실패했어요. " +
-      "페이지를 새로고침하고 다시 시도해주세요."
+      "이미지 저장에 실패했어요.\n" +
+      "페이지를 새로고침한 후 다시 시도해주세요."
     );
 
   }
